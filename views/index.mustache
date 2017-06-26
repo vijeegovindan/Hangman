@@ -10,20 +10,22 @@
       <div class="heading">
         <ul>
           <li><h4> Mystery word  {{#mode}}: {{mode}} mode{{/mode}} </h4></li>
+          <!--Message displayed to reflect the number of guesses made : 8 Guesses allowed-->
+          {{^chances_over}}
+          <li><h4>you have {{#num_chances_given}}{{.}}{{/num_chances_given}} guesses left</h4></li>
+          {{/chances_over}}
 
-          {{^outOfGuess}}
-          <li><h4>you have {{#noOfGuess}}{{.}}{{/noOfGuess}} guesses left</h4></li>
-          {{/outOfGuess}}
-
-          {{#outOfGuess}}
+          <!-- Message saying the user is done with chances of guessing letters-->
+          {{#chances_over}}
           <li><h4>You are out of guesses</h4></li>
-          {{/outOfGuess}}
+          {{/chances_over}}
 
         </ul>
       </div>
-
+      <!--Display the word guessed : keep adding the letters until 8 chances -->
       <div class="results_1">{{#guessedWord}}{{.}}{{/guessedWord}}</div>
 
+      <!-- Make a guess block -->
       {{^resultsMsg}}
       <div class="submit">
       <form method='post' action="/index">
@@ -34,6 +36,7 @@
       </div>
       {{/resultsMsg}}
 
+      <!-- Try again block -->
      {{#resultsMsg}}
       <div class="submit">
       <form method='post' action="/index">
@@ -43,9 +46,11 @@
       </form>
       </div>
      {{/resultsMsg}}
-
+     <!-- Message to show the letters guesssed-->
       {{#guessedLetters}}<div class="results">Letters guessed: {{.}}</div>{{/guessedLetters}}
+      <!-- Repeat Message : If the same letter is entered more than once -->
       {{#repeatMsg}}<div>{{.}}</div>{{/repeatMsg}}
+      <!--Error messages -->
       {{#errors}}<div>{{.}}</div>{{/errors}}
     </div>
   </body>
