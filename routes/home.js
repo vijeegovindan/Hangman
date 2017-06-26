@@ -1,4 +1,4 @@
-// Define my Router
+// Defining  Router for Home Page
 const express = require('express');
 const router = express.Router();
 
