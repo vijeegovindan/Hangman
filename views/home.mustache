@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+    <title>Mystery word</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">
+        <ul>
+          <li><h4> Mystery word </h4></li>
+          <li><h4>Select the mode</h4></li>
+        </ul>
+      </div>
+      <div class="submit">
+       <form method='post' action="/home">
+          <select name="selLevel" class="selLevel">
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Hard </option>
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
