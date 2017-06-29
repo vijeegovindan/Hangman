@@ -47,6 +47,7 @@ router.post("/", function(req, res){
       error_messages.push(error.msg);
       });
       res.render("index", {errors: error_messages,
+                          guessedWord: req.session.guess_word,
                           num_chances_given: req.session.num_chances_given,
                           mode: req.session.mode});
   }
@@ -57,6 +58,7 @@ router.post("/", function(req, res){
       let repeat_Msg = "";
       let results = "";
       let out_of_guess = false;
+      let already_guessed = false;
 
       for (let j = 0; j < req.session.given_word.length; j++) {
           if(req.session.num_chances_given <= 8){
@@ -67,14 +69,15 @@ router.post("/", function(req, res){
           }
       }
 
-      if(!good){ req.session.num_chances_given--; } // Number of guesses
-
       if(parseInt(req.session.guessedLetters.indexOf(letter)) > -1){  // Redundant alphabet selection
         repeat_Msg = 'Already guessed, please try again';
+        already_guessed = true;
       }
       else {
         req.session.guessedLetters.push(letter);
       }
+
+      if(!good && !already_guessed){ req.session.num_chances_given--; } // Number of guesses
 
       if(parseInt(req.session.num_chances_given) <= 0){
         out_of_guess = true;
